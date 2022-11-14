@@ -4,19 +4,19 @@ import Item from './Item'
 type Props = {}
 
 const TodoList = (props: Props) => {
+  const [input, setInput] = useState('')
   const [items, setItems] = useState<string[]>([])
-  const inputEl = useRef<HTMLInputElement>(null)
 
   function handleClick() {
-    if (inputEl.current?.value === '') {
+    if (input === '') {
       alert('Add a todo task!')
       return
     }
-    let newItems = [...items, inputEl.current?.value || '']
+    let newItems = [...items, input]
     setItems(newItems)
     console.log(newItems)
     localStorage.setItem('items', JSON.stringify(newItems))
-    inputEl.current.value = ''
+    setInput('')
   }
 
   function handleInputKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -32,7 +32,10 @@ const TodoList = (props: Props) => {
       <h1 className="text-slate-50 text-5xl">TODO LIST &#128221;</h1>
       <div className="flex justify-center mt-8 w-full max-w-xl">
         <input
-          ref={inputEl}
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value)
+          }}
           onKeyDown={handleInputKeyPress}
           className="bg-slate-800 py-2 pl-2 rounded-l w-full text-slate-50 focus:outline-none"
           type="text"
