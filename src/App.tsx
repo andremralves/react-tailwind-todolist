@@ -15,6 +15,8 @@ function App() {
             by André Alves |{' '}
             <a
               className="hover:text-blue-300"
+              target="_blank"
+              rel="noreferrer"
               href="https://github.com/andremralves/react-tailwind-todolist"
             >
               Source code
